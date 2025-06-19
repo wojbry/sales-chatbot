@@ -1,0 +1,6 @@
+What were the total sales for 'Basic T-Shirt' in 2023?
+Show me the monthly revenue for 'Wireless Headphones'.
+Which product had the highest sales in January 2022?
+What product had the lowest sales in 2023?
+Show me the sales of P05 in the last 6 months of 2023.
+Is there a seasonal patern in sales of Wireless Headphones in years 2021-2023?

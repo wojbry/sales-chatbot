@@ -1,0 +1,195 @@
+/* src/App.css */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App-header {
+  background-color: #4a69bd; /* Deep blue */
+  padding: 20px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 2.2em;
+}
+
+.App-main-content {
+  flex: 1; /* Allows main content to take available space */
+  display: flex;
+  flex-direction: row; /* Side-by-side layout */
+  padding: 20px;
+  gap: 20px; /* Space between sections */
+  flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
+}
+
+/* Common Section Styling */
+.dashboard-section,
+.chat-section {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+}
+
+.dashboard-section {
+  flex: 3; /* Dashboard takes more space */
+  min-width: 600px; /* Minimum width for dashboard */
+}
+
+.chat-section {
+  flex: 1; /* Chat takes less space */
+  min-width: 300px; /* Minimum width for chat */
+}
+
+@media (max-width: 900px) {
+  .App-main-content {
+    flex-direction: column; /* Stack vertically on smaller screens */
+    gap: 10px;
+  }
+  .dashboard-section,
+  .chat-section {
+    min-width: unset; /* Remove min-width constraints */
+    width: 100%; /* Take full width */
+  }
+}
+
+/* Looker Dashboard specific styles */
+.looker-dashboard-container {
+  flex: 1; /* Allow iframe to fill space */
+  display: flex;
+  flex-direction: column;
+}
+
+.looker-dashboard-container h2 {
+  margin-top: 0;
+  color: #4a69bd;
+  text-align: center;
+}
+
+.looker-dashboard-container iframe {
+  border-radius: 4px;
+}
+
+/* Chat Agent specific styles */
+.chat-agent-container {
+  flex: 1; /* Allow messages to scroll */
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 180px); /* Adjust based on header/footer size */
+}
+
+.chat-agent-container h2 {
+  margin-top: 0;
+  color: #4a69bd;
+  text-align: center;
+}
+
+.messages-display {
+  flex: 1; /* Messages area takes available height */
+  overflow-y: auto; /* Enable scrolling for messages */
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  display: flex; /* For styling messages */
+  flex-direction: column; /* Arrange messages vertically */
+}
+
+.no-messages-tip {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin: auto; /* Center the tip */
+}
+
+.message {
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border-radius: 18px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user {
+  align-self: flex-end; /* Align user messages to the right */
+  background-color: #87ceeb; /* Light sky blue */
+  color: white;
+  border-bottom-right-radius: 2px;
+}
+
+.message.agent {
+  align-self: flex-start; /* Align agent messages to the left */
+  background-color: #dcdcdc; /* Light grey */
+  color: #333;
+  border-bottom-left-radius: 2px;
+}
+
+.message.agent.loading {
+    font-style: italic;
+    color: #666;
+}
+
+.message-input-form {
+  display: flex;
+  gap: 10px;
+  margin-top: auto; /* Push input to bottom */
+}
+
+.message-input-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.message-input-form button {
+  padding: 10px 15px;
+  background-color: #4a69bd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.message-input-form button:hover:not(:disabled) {
+  background-color: #3b508f;
+}
+
+.message-input-form button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Footer Styling */
+.App-footer {
+  background-color: #f0f2f5;
+  padding: 10px;
+  text-align: center;
+  color: #666;
+  font-size: 0.8em;
+  border-top: 1px solid #e0e0e0;
+}
