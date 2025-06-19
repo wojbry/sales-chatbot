@@ -6,7 +6,7 @@ from google.api_core.exceptions import GoogleAPIError
 
 # --- Configuration ---
 # Set your Google Cloud Project ID and BigQuery Dataset ID
-GCP_PROJECT_ID = "hacker2025-team-199-dev" # e.g., "my-sales-analytics-2024"
+GCP_PROJECT_ID = "put project name here" # e.g., "my-sales-analytics-2024"
 BQ_DATASET_ID = "sales_analyst"
 BQ_TABLE_ID = "artificial_sales" # Your main sales data table
 
