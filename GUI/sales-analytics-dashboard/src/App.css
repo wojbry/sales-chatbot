@@ -30,48 +30,82 @@ body {
   font-size: 2.2em;
 }
 
+/* --- Main Layout using CSS Grid --- */
 .App-main-content {
   flex: 1; /* Allows main content to take available space */
-  display: flex;
-  flex-direction: row; /* Side-by-side layout */
+  display: grid;
   padding: 20px;
-  gap: 20px; /* Space between sections */
-  flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
+  gap: 20px; /* Space between grid items */
+  /*
+   * Default layout for larger screens (desktop first approach):
+   * Two columns: 2fr for dashboard, 1fr for the chat/calendar stack.
+   * rows: auto is enough as content will define height
+   */
+  grid-template-columns: 2fr 1fr; /* 2/3 and 1/3 ratio */
+  grid-template-rows: auto;
+  min-height: calc(100vh - 120px); /* Adjust based on header/footer height */;
 }
 
-/* Common Section Styling */
-.dashboard-section,
+/* Assign grid areas */
+.dashboard-section {
+  grid-column: 1 / 2; /* Spans the first column */
+  grid-row: 1 / span 2; /* Spans both rows */
+}
+
 .chat-section {
+  grid-column: 2 / 3; /* Spans the second column */
+  grid-row: 1 / 2;    /* Stays in the first row of second column */
+}
+
+.calendar-section {
+  grid-column: 2 / 3; /* Spans the second column */
+  grid-row: 2 / 3;    /* Stays in the second row of second column (below chat) */
+}
+
+/* --- Common Section Styling --- */
+.dashboard-section,
+.chat-section,
+.calendar-section {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
+  display: flex; /* Use flexbox internally for content */
   flex-direction: column;
-  min-height: 500px;
 }
 
-.dashboard-section {
-  flex: 3; /* Dashboard takes more space */
-  min-width: 600px; /* Minimum width for dashboard */
-}
+/* Adjust min-heights for better initial display, especially for the chat and calendar */
+.dashboard-section { min-height: 700px; } /* Should fill vertical space */
+.chat-section { min-height: 350px; }
+.calendar-section { min-height: 350px; }
 
-.chat-section {
-  flex: 1; /* Chat takes less space */
-  min-width: 300px; /* Minimum width for chat */
-}
 
+/* --- Responsive layout for smaller screens (mobile first) --- */
 @media (max-width: 900px) {
   .App-main-content {
-    flex-direction: column; /* Stack vertically on smaller screens */
-    gap: 10px;
+    grid-template-columns: 1fr; /* Single column */
+    grid-template-rows: auto; /* Rows will automatically size */
+    padding: 10px; /* Reduce padding on small screens */
+    gap: 10px;    /* Reduce gap on small screens */
+    min-height: unset; /* Don't force min-height on small screens */
   }
+
+  /* Reset grid areas for single column stacking */
   .dashboard-section,
-  .chat-section {
-    min-width: unset; /* Remove min-width constraints */
+  .chat-section,
+  .calendar-section {
+    grid-column: auto;
+    grid-row: auto;
     width: 100%; /* Take full width */
+    min-height: unset; /* Don't force min-height on small screens */
   }
+
+  /* Specific order for small screens: Dashboard -> Chat -> Calendar */
+  .dashboard-section { order: 1; }
+  .chat-section { order: 2; }
+  .calendar-section { order: 3; }
 }
+
 
 /* Looker Dashboard specific styles */
 .looker-dashboard-container {
@@ -95,7 +129,7 @@ body {
   flex: 1; /* Allow messages to scroll */
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 180px); /* Adjust based on header/footer size */
+  max-height: 100%; /* Ensure it fits within its parent flex item */
 }
 
 .chat-agent-container h2 {
@@ -183,6 +217,20 @@ body {
   background-color: #cccccc;
   cursor: not-allowed;
 }
+
+/* Google Calendar Embed specific styles */
+.google-calendar-embed-container {
+  flex: 1; /* Allows iframe to fill space */
+  display: flex;
+  flex-direction: column;
+}
+
+.google-calendar-embed-container iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 300px; /* Ensure a good minimum height */
+}
+
 
 /* Footer Styling */
 .App-footer {

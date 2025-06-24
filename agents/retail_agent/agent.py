@@ -1,14 +1,7 @@
 import os
-import google.generativeai as genai
 from google.adk import Agent
 from google.cloud import bigquery
 from google.api_core.exceptions import GoogleAPIError
-
-# --- Configuration ---
-# Set your Google Cloud Project ID and BigQuery Dataset ID
-GCP_PROJECT_ID = "put project name here" # e.g., "my-sales-analytics-2024"
-BQ_DATASET_ID = "sales_analyst"
-BQ_TABLE_ID = "artificial_sales" # Your main sales data table
 
 
 
@@ -29,7 +22,7 @@ def execute_bigquery_query(sql_query: str) -> str:
     """
     print(f"\n--- Tool Call: Executing BigQuery Query ---\n{sql_query}\n--- End Tool Call ---\n")
     # Initialize BigQuery Client
-    bq_client = bigquery.Client(project=GCP_PROJECT_ID)
+    bq_client = bigquery.Client(project="hacker2025-team-199-dev")
 
     try:
         # Basic validation to ensure it's a SELECT statement for safety
@@ -66,7 +59,7 @@ def execute_bigquery_query(sql_query: str) -> str:
 # Include descriptions for columns as that helps the LLM understand their meaning.
 bigquery_schema_context = f"""
 You have access to the following BigQuery table:
-Table: `{GCP_PROJECT_ID}.{BQ_DATASET_ID}.{BQ_TABLE_ID}`
+Table: `hacker2025-team-199-dev.sales_analyst.artificial_sales`
 
 Columns:
   - `Date` (DATE): The first day of the month for sales data (e.g., '2023-01-01').
@@ -75,7 +68,7 @@ Columns:
   - `SalesRevenue` (NUMERIC): Total sales revenue for the month for this product.
 
 Guidelines for generating SQL:
-1. Always use the fully qualified table name: `{GCP_PROJECT_ID}.{BQ_DATASET_ID}.{BQ_TABLE_ID}`.
+1. Always use the fully qualified table name: `hacker2025-team-199-dev.sales_analyst.artificial_sales`.
 2. For date filtering, use `PARSE_DATE('%Y-%m-%d', 'YYYY-MM-DD')` or date functions like `DATE_TRUNC`, `CURRENT_DATE()`, `EXTRACT`.
 3. If a question asks for "total" or "sum", use `SUM()`.
 4. If a question asks for "average", use `AVG()`.

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // IMPORTANT: Replace with your actual Agent Engine (Cloud Run) API Endpoint
-const AGENT_API_ENDPOINT = "put endpoint here";
+const AGENT_API_ENDPOINT = "http://localhost:8000/query";
 
 const ChatAgent = () => {
     const [messages, setMessages] = useState([]);
@@ -42,6 +42,7 @@ const ChatAgent = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'accept': 'application/json'
                 },
                 body: JSON.stringify({ question: inputMessage }),
             });

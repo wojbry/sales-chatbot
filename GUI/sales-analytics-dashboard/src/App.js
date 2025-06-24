@@ -1,8 +1,9 @@
-// src/App.js
+// src/App.js (partial example)
 import React from 'react';
 import LookerDashboard from './components/LookerDashboard';
 import ChatAgent from './components/ChatAgent';
-import './App.css'; // Import the CSS file
+import GoogleCalendarEmbed from './components/GoogleCalendarEmbed'; // Import the new component
+import './App.css';
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         </section>
         <section className="chat-section">
           <ChatAgent />
+        </section>
+        <section className="calendar-section">
+          <GoogleCalendarEmbed />
         </section>
       </main>
       <footer className="App-footer">
