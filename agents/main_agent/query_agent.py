@@ -28,13 +28,11 @@ vertexai.init(
 )
 
 # Filter agent engines by the app name in .env
-#ae_apps = agent_engines.list(filter=f'display_name="{app_name}"')
-#remote_app = next(ae_apps)
+ae_apps = agent_engines.list(filter=f'display_name="{app_name}"')
+remote_app = next(ae_apps)
 
-#agent_engine = vertexai.agent_engines.get('projects/634734241375/locations/us-central1/reasoningEngines/8297715187662716928')
-
+#
 #logging.info(f"Using remote app: {remote_app.display_name}")
-remote_app = vertexai.agent_engines.get('projects/634734241375/locations/us-central1/reasoningEngines/8297715187662716928')
 # Get a session for the remote app
 remote_session = remote_app.create_session(user_id="u_457")
 
